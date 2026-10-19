@@ -1,56 +1,74 @@
 ---
-# If true, the FSM transitions are managed by an external tool
 Managed: false
-# If true and the FSM is self-managed, transitions should be triggered
-StepByStep: true
-# Change idle behaviour, if true the state is kept until transition,
-# otherwise the FSM holds the last state until transition
+StepByStep: false
 IdleKeepState: false
-# Where to look for state libraries
+
 StatesLibraries:
 - "@MC_STATES_DEFAULT_RUNTIME_INSTALL_PREFIX@"
 - "@MC_STATES_RUNTIME_INSTALL_PREFIX@"
-# Where to look for state files
+
 StatesFiles:
 - "@MC_STATES_DEFAULT_RUNTIME_INSTALL_PREFIX@/data"
 - "@MC_STATES_RUNTIME_INSTALL_PREFIX@/data"
-# If true, state factory will be more verbose
-VerboseStateFactory: false
-# Additional robots to load
-robots:
-  ground:
-    module: env/ground
-# General constraints, always on
+
+VerboseStateFactory: true
+
 constraints:
 - type: contact
 - type: dynamics
   damper: [0.1, 0.01, 0.5]
 - type: compoundJoint
-# Collision constraint
+
 collisions:
 - type: collision
   useMinimal: true
-# Initial set of contacts
-contacts:
-- r2: ground
-  r1Surface: LeftFoot
-  r2Surface: AllGround
-- r2: ground
-  r1Surface: RightFoot
-  r2Surface: AllGround
 
-# Some options for a specific robot
-jvrc1:
-  posture:
-    stiffness: 1
-    weight: 10
-  ff:
-    stiffness: 2
-    weight: 100
-# Implement some additional text states
-states: {}
-# Transitions map
+# Pass configuration to the custom Idle C++ state
+configs:
+
+  Idle:
+    duration: 3.0
+
+  Independent:
+    LeftTarget:
+      position: [0.50, 0.10, 0.10] # x, y, z
+      orientation: [-1.57079632679, 0.0, 0.0] # roll, pitch, yaw
+
+    RightTarget:
+      position: [0.50, 0.40, 0.10]
+      orientation: [1.57079632679, 0.0, 0.0]
+
+    Trajectory:
+      duration: 6.0
+      outwardAmplitude: 0.12
+
+  Collaborative:
+    Impedance:
+      Stiffness: [30.0, 30.0, 30.0,70.0, 70.0, 70.0] # rot, tras
+      DampingRatio: 1.0
+      Inertia: [40.0, 40.0, 40.0, 40.0, 40.0, 40.0]
+    
+    RelativeImpedance:
+      Stiffness: [30.0, 30.0, 30.0,50.0, 50.0, 50.0]
+      DampingRatio: 1.0
+    
+    SqueezeControl:
+      Reference: -10.0
+    
+    StiffnessEstimation:
+      test1: 1.0
+
+
+
+
+
+
+# The exported C++ states are referenced directly.
+# There is no need to redefine them under states:.
+
 transitions:
-- [FSMDualManipulation_Initial, OK, FSMDualManipulation_Initial, Strict]
-# Initial state
-init: FSMDualManipulation_Initial
+- [Idle, OK, Independent, Auto]
+#- [Independent, OK, Collaborative, Auto]
+#- [Collaborative, OK, Idle, Auto]
+
+init: Idle

@@ -1,0 +1,35 @@
+---
+# Framework settings
+MainRobot: xArm7
+
+robots:
+  xarm7_2:
+    module: "xArm7"
+    init_pos:
+      translation: [0.0, 0.5, 0.0]
+      rotation: [0.0, 0.0, 0.0]
+  
+  ground:
+    module: env/ground
+    
+  box1:
+    module: "object/box"
+    init_pos:
+      translation: [0.5, 0.25, 0.05]
+      rotation: [0, 0, 0]
+    
+    
+
+# Enable only the new FSM controller
+Enabled: FSMDualManipulation
+
+Timestep: 0.001
+
+# Plugins
+Plugins: [ROS2]
+
+
+
+# Logging
+LogDirectory: "/home/vscode/workspace/sandbox/controllers/dual_arm_controller/Logs"
+LogTemplate: "fsm"
