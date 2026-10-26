@@ -1,0 +1,32 @@
+# mc_rtc FRAMEWORK SETTINGS
+# ============================================================
+MainRobot: xArm7
+Enabled: XarmReset
+Timestep: 0.005
+
+
+
+robots:
+  xarm7_2:
+    module: "xArm7"
+    init_pos:
+      translation: [0.0, 0.66, 0.0]
+      rotation: [0.0, 0.0, 0.0]
+
+
+Robots:
+  xarm7:
+    module: "xArm7"  
+    interface: interface_template
+    robot_interface:
+      driver: RobotDriverxArm
+      ip: 192.168.1.211
+      port: 0
+      autostart: true
+      
+  xarm7_2:
+    base: xarm7              
+    robot_interface:             
+      ip: 192.168.1.244
+      
+     

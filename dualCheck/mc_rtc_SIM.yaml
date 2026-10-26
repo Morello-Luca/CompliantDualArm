@@ -1,0 +1,30 @@
+---
+# ============================================================
+# FRAMEWORK SETTINGS
+# ============================================================
+
+MainRobot:
+  name: xarm7
+  module: xArm7
+
+Enabled: [DualCheck]
+
+Timestep: 0.001
+
+# ============================================================
+# ADDITIONAL ROBOTS
+# ============================================================
+
+robots:
+  xarm7_2:
+    module: xArm7
+    init_pos:
+      translation: [0.0, 0.66, 0.0]
+      rotation: [0.0, 0.0, 0.0]
+
+# ============================================================
+# LOGGING
+# ============================================================
+
+LogDirectory: "/home/vscode/workspace/sandbox/controllers/dual_arm_controller/Logs"
+LogTemplate: "fsm"
