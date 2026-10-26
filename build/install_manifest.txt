@@ -1,7 +1,0 @@
-/home/vscode/workspace/install/lib/mc_controller/etc/FSMDualManipulation.yaml
-/home/vscode/workspace/install/lib/libFSMDualManipulation.so
-/home/vscode/workspace/install/lib/mc_controller/FSMDualManipulation_controller.so
-/home/vscode/workspace/install/lib/mc_controller/FSMDualManipulation/states/Idle.so
-/home/vscode/workspace/install/lib/mc_controller/FSMDualManipulation/states/Independent.so
-/home/vscode/workspace/install/lib/mc_controller/FSMDualManipulation/states/Collaborative.so
-/home/vscode/workspace/install/lib/mc_controller/FSMDualManipulation/states/data/states.yaml

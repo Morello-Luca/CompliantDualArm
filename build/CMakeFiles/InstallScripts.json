@@ -1,9 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/vscode/workspace/sandbox/controllers/FSM-DualManipulation/build/cmake_install.cmake",
-		"/home/vscode/workspace/sandbox/controllers/FSM-DualManipulation/build/src/cmake_install.cmake",
-		"/home/vscode/workspace/sandbox/controllers/FSM-DualManipulation/build/src/states/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
